@@ -65,25 +65,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return new Result(min, sec);
     }
-
-    private class Result {
-        int min;
-        int sec;
-
-        Result() {
-            min = 0;
-            sec = 0;
-        }
-
-        Result(int min, int sec) {
-            this.min = min;
-            this.sec = sec;
-        }
-
-        @NonNull
-        @Override
-        public String toString() {
-            return "" + min + " m " + sec + " s";
-        }
-    }
 }
