@@ -9,9 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText editText;
+    private TextInputEditText editText;
 
     private final View.OnKeyListener keyListener = new View.OnKeyListener() {
         @Override
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editText = findViewById(R.id.et_input);
+        editText = findViewById(R.id.editText);
         editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
         editText.setOnKeyListener(keyListener);
 
