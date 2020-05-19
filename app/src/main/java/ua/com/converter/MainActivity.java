@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -38,32 +36,21 @@ public class MainActivity extends AppCompatActivity {
         showResult(new Result());
     }
 
-    public void startConvert(View v) {
-        String data = editText.getText().toString();
-        showResult(logic(data));
-    }
-
     private void showResult(Result result) {
         TextView tvResult = findViewById(R.id.tv_result);
         tvResult.setText(result.toString());
     }
 
     private Result logic(String data) {
-        int min = 0;
-        int sec = 0;
-
-        if (data != null) {
-            float parsed = 0f;
-            try {
-                parsed = Float.parseFloat(data);
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Not a Number", Toast.LENGTH_SHORT).show();
-            }
-
+        try {
+            float parsed = Float.parseFloat(data);
             float temp = 60 / parsed;
-            min = (int) temp;
-            sec = Math.round((temp - min) * 60);
+            int min = (int) temp;
+            int sec = Math.round((temp - min) * 60);
+            return new Result(min, sec);
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Not a Number", Toast.LENGTH_SHORT).show();
         }
-        return new Result(min, sec);
+        return new Result();
     }
 }

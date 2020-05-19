@@ -1,8 +1,8 @@
 package ua.com.converter;
 
 class Result {
-    int min;
-    int sec;
+    private final int min;
+    private final int sec;
 
     Result() {
         min = 0;
