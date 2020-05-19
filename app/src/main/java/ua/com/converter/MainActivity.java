@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,19 +39,29 @@ public class MainActivity extends AppCompatActivity {
 
     private void showResult(Result result) {
         TextView tvResult = findViewById(R.id.tv_result);
-        tvResult.setText(result.toString());
+        if (result != null) {
+            tvResult.setText(result.toString());
+        }
     }
 
     private Result logic(String data) {
         try {
             float parsed = Float.parseFloat(data);
+            if (parsed < 1f || parsed > 1000){
+                editText.setError("Value must be in range 1-1000");
+                return null;
+            }
             float temp = 60 / parsed;
             int min = (int) temp;
             int sec = Math.round((temp - min) * 60);
             return new Result(min, sec);
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Not a Number", Toast.LENGTH_SHORT).show();
+            editText.setError("Value must be number in range 1-1000");
         }
-        return new Result();
+        return null;
+    }
+
+    public void onFrameClick(View view){
+        editText.clearFocus();
     }
 }
